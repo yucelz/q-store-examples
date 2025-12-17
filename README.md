@@ -408,47 +408,7 @@ python tinyllama_react_training.py
 | **TINYLLAMA_TRAINING_README.md** | TinyLlama fine-tuning guide |
 | **IMPROVEMENTS_SUMMARY.md** | Code improvements and comparisons |
 
-## 🛠️ Project Structure
 
-```
-examples/
-├── README.md                      # This file
-├── requirements.txt               # Python dependencies
-├── requirements-minimal.txt       # Minimal dependencies
-├── environment.yml                # Conda environment
-├── pyproject.toml                 # Modern Python packaging
-├── setup.py                       # Package setup
-├── .env.example                   # Environment template
-│
-├── basic_example.py               # Basic Q-Store usage
-├── financial_example.py           # Financial applications
-├── quantum_db_quickstart.py       # Comprehensive tutorial
-├── ml_training_example.py         # ML integration
-│
-├── tinyllama_react_training.py    # React LLM training
-├── react_dataset_generator.py     # Dataset generation
-├── run_react_training.sh          # Automation script
-├── verify_react_integration.py    # Integration tests
-├── verify_tinyllama_example.py    # TinyLlama verification
-│
-├── show_config.py                    # Display current configuration
-├── test_pinecone_ionq_connection.py  # Connection tests
-├── test_cirq_adapter_fix.py          # Cirq adapter test
-├── CONNECTION_FIX_SUMMARY.md         # Connection fix docs
-│
-├── src/
-│   └── q_store_examples/
-│       ├── __init__.py
-│       ├── examples_v3_2.py          # V3.2 ML training examples
-│       ├── examples_v3_3.py          # V3.3 high-performance examples
-│       ├── examples_v3_3_1.py        # V3.3.1 corrected batch gradients
-│       ├── examples_v3_4.py          # V3.4 performance optimized (8-10x faster!)
-│       ├── examples_v31.py           # V3.1 examples
-│       ├── quantum_db_quickstart.py  # Alternative location
-│       └── [Other examples...]
-│
-└── [Documentation files...]
-```
 
 ## 🔧 Configuration
 
