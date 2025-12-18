@@ -930,22 +930,22 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    # Set global configuration - prioritize command line args, then env vars, then defaults
-    USE_MOCK = not args.no_mock
-    PINECONE_API_KEY = args.pinecone_api_key or os.getenv('PINECONE_API_KEY')
-    PINECONE_ENVIRONMENT = args.pinecone_env or os.getenv('PINECONE_ENVIRONMENT', 'us-east-1')
-    IONQ_API_KEY = args.ionq_api_key or os.getenv('IONQ_API_KEY')
-    IONQ_TARGET = args.ionq_target or os.getenv('IONQ_TARGET', 'simulator')
+    # Update global configuration - prioritize command line args, then env vars, then defaults
+    globals()['USE_MOCK'] = not args.no_mock
+    globals()['PINECONE_API_KEY'] = args.pinecone_api_key or os.getenv('PINECONE_API_KEY')
+    globals()['PINECONE_ENVIRONMENT'] = args.pinecone_env or os.getenv('PINECONE_ENVIRONMENT', 'us-east-1')
+    globals()['IONQ_API_KEY'] = args.ionq_api_key or os.getenv('IONQ_API_KEY')
+    globals()['IONQ_TARGET'] = args.ionq_target or os.getenv('IONQ_TARGET', 'simulator')
 
-    if not USE_MOCK:
+    if not globals()['USE_MOCK']:
         print("\n🔧 Configuration:")
         print(f"  Mode: Real backends")
-        print(f"  Pinecone API Key: {'✓ Set' if PINECONE_API_KEY else '✗ Not set'}")
-        print(f"  Pinecone Environment: {PINECONE_ENVIRONMENT}")
-        print(f"  IonQ API Key: {'✓ Set' if IONQ_API_KEY else '✗ Not set'}")
-        print(f"  IonQ Target: {IONQ_TARGET}\n")
+        print(f"  Pinecone API Key: {'✓ Set' if globals()['PINECONE_API_KEY'] else '✗ Not set'}")
+        print(f"  Pinecone Environment: {globals()['PINECONE_ENVIRONMENT']}")
+        print(f"  IonQ API Key: {'✓ Set' if globals()['IONQ_API_KEY'] else '✗ Not set'}")
+        print(f"  IonQ Target: {globals()['IONQ_TARGET']}\n")
 
-        if not IONQ_API_KEY or not PINECONE_API_KEY:
+        if not globals()['IONQ_API_KEY'] or not globals()['PINECONE_API_KEY']:
             print("⚠️  Warning: Missing API keys. Some examples may be limited.")
             print("   Set IONQ_API_KEY and PINECONE_API_KEY for full functionality.\n")
     else:
