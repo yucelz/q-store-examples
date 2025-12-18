@@ -850,7 +850,42 @@ async def main():
         ("Performance Evolution", example_7_performance_evolution),
     ]
 
-    for name, example_func in examples:
+    # Interactive menu
+    print("\n" + "="*80)
+    print("SELECT EXAMPLES TO RUN")
+    print("="*80)
+    print("\nAvailable examples:")
+    for i, (name, _) in enumerate(examples, 1):
+        print(f"  {i}. {name}")
+    
+    print("\nOptions:")
+    print("  0 - Run ALL examples")
+    print("  1-7 - Run specific example")
+    print("  q - Quit")
+    
+    choice = input("\nEnter your choice (0, 1-7, or q): ").strip().lower()
+    
+    if choice == 'q':
+        print("\nExiting...")
+        return
+    
+    examples_to_run = []
+    
+    if choice == '0':
+        # Run all examples
+        examples_to_run = examples
+        print("\n✓ Running ALL examples...\n")
+    elif choice.isdigit() and 1 <= int(choice) <= len(examples):
+        # Run selected example
+        idx = int(choice) - 1
+        examples_to_run = [examples[idx]]
+        print(f"\n✓ Running example {choice}: {examples[idx][0]}...\n")
+    else:
+        print("\n⚠️  Invalid choice. Exiting...")
+        return
+
+    # Run selected examples
+    for name, example_func in examples_to_run:
         try:
             print(f"\nRunning: {name}")
             await example_func()
@@ -859,21 +894,25 @@ async def main():
             if EXAMPLE_LOGGER:
                 EXAMPLE_LOGGER.log_error(f"Error in {name}: {e}")
 
-    # Finalize logging
-    if EXAMPLE_LOGGER:
+    # Finalize logging only if examples were run
+    if EXAMPLE_LOGGER and examples_to_run:
         EXAMPLE_LOGGER.finalize()
 
-    print("\n" + "="*80)
-    print("All v3.4 examples complete!")
-    print("\n📊 Key Takeaways (v3.4):")
-    print("  ✓ IonQBatchClient: 1 API call vs 20 (12x faster submission)")
-    print("  ✓ Native Gates: GPi/GPi2/MS (30% faster execution)")
-    print("  ✓ Smart Caching: Template reuse (10x faster preparation)")
-    print("  ✓ Combined Effect: 8-10x overall speedup in production")
-    print("\n🚀 Migration from v3.3.1:")
-    print("   Just add: config.enable_all_v34_features = True")
-    print("   All existing code remains compatible!")
-    print("="*80 + "\n")
+    if examples_to_run:
+        print("\n" + "="*80)
+        if len(examples_to_run) == len(examples):
+            print("All v3.4 examples complete!")
+        else:
+            print(f"Example complete: {examples_to_run[0][0]}")
+        print("\n📊 Key Takeaways (v3.4):")
+        print("  ✓ IonQBatchClient: 1 API call vs 20 (12x faster submission)")
+        print("  ✓ Native Gates: GPi/GPi2/MS (30% faster execution)")
+        print("  ✓ Smart Caching: Template reuse (10x faster preparation)")
+        print("  ✓ Combined Effect: 8-10x overall speedup in production")
+        print("\n🚀 Migration from v3.3.1:")
+        print("   Just add: config.enable_all_v34_features = True")
+        print("   All existing code remains compatible!")
+        print("="*80 + "\n")
 
 
 if __name__ == "__main__":

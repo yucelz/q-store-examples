@@ -314,7 +314,10 @@ class ExampleLogger:
         self._save_benchmark()
 
         self.log_info(f"Example '{self.example_name}' finalized")
-        self.log_info(f"Total duration: {self.benchmarks['total_duration_ms']:.2f}ms")
+        if self.benchmarks.get('total_duration_ms') is not None:
+            self.log_info(f"Total duration: {self.benchmarks['total_duration_ms']:.2f}ms")
+        else:
+            self.log_info("Total duration: N/A (no completed steps)")
         self.log_info(f"Benchmark saved to: {self.benchmark_file}")
         
         # Stop capturing stdout/stderr
