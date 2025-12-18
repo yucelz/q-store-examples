@@ -4,6 +4,8 @@ Standalone example projects demonstrating Q-Store 3.4.3 quantum database capabil
 
 **Note**: This is a standalone examples repository. Q-Store 3.4.3 is installed via pip or from a local wheel file.
 
+📖 **For detailed setup instructions and troubleshooting, see [SETUP.md](SETUP.md)**
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -14,15 +16,18 @@ Standalone example projects demonstrating Q-Store 3.4.3 quantum database capabil
 
 ### Installation
 
-#### Option 1: Using pip (Recommended)
+#### Option 1: Editable Install (Recommended for Development)
 
 ```bash
 # 1. Clone this repository
 git clone https://github.com/yucelz/q-store-examples.git
 cd q-store-examples
 
-# 2. Install Q-Store 3.4.3 and dependencies
-pip install -r requirements.txt
+# 2. Install package in editable mode (changes are immediately reflected)
+pip install -e .
+
+# Or with optional ML dependencies
+pip install -e ".[ml,data,dev]"
 
 # 3. Set up environment variables
 cp .env.example .env
@@ -32,19 +37,18 @@ cp .env.example .env
 python scripts/verify_installation.py
 ```
 
-#### Option 2: Using conda
+#### Option 2: Using requirements.txt
 
 ```bash
 # 1. Clone this repository
 git clone https://github.com/yucelz/q-store-examples.git
 cd q-store-examples
 
-# 2. Create conda environment (if environment.yml exists)
-conda create -n q-store-examples python=3.11
-conda activate q-store-examples
-
-# 3. Install Q-Store 3.4.3 and dependencies
+# 2. Install Q-Store 3.4.3 and dependencies
 pip install -r requirements.txt
+
+# 3. Install the package (required for imports to work)
+pip install -e .
 
 # 4. Set up environment variables
 cp .env.example .env
@@ -54,7 +58,29 @@ cp .env.example .env
 python scripts/verify_installation.py
 ```
 
-#### Option 3: Using Local Wheel File
+#### Option 3: Using conda
+
+```bash
+# 1. Clone this repository
+git clone https://github.com/yucelz/q-store-examples.git
+cd q-store-examples
+
+# 2. Create conda environment
+conda create -n q-store-examples python=3.11
+conda activate q-store-examples
+
+# 3. Install the package
+pip install -e .
+
+# 4. Set up environment variables
+cp .env.example .env
+# Edit .env and add your API keys
+
+# 5. Verify installation
+python scripts/verify_installation.py
+```
+
+#### Option 4: Using Local Wheel File
 
 If you have the Q-Store wheel file:
 
@@ -81,7 +107,34 @@ cp .env.example .env
 python scripts/verify_installation.py
 ```
 
-#### Option 4: Minimal Installation (No ML Dependencies)
+#### Option 4: Using Local Wheel File
+
+If you have the Q-Store wheel file:
+
+```bash
+# 1. Clone this repository
+git clone https://github.com/yucelz/q-store-examples.git
+cd q-store-examples
+
+# 2. Copy the wheel file to this directory
+cp /path/to/q_store-3.4.3-cp313-cp313-manylinux_2_17_x86_64.whl .
+
+# 3. Install using make
+make install-wheel
+
+# Or install manually:
+# pip install q_store-3.4.3-cp313-cp313-manylinux_2_17_x86_64.whl
+# pip install -e .
+
+# 4. Set up environment variables
+cp .env.example .env
+# Edit .env and add your API keys
+
+# 5. Verify installation
+python scripts/verify_installation.py
+```
+
+#### Option 5: Minimal Installation (No ML Dependencies)
 
 ```bash
 # Clone and navigate to repository
