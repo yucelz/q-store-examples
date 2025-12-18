@@ -6,10 +6,13 @@
 # ============================================================================
 
 # Q-Store quantum database (main package)
-q-store>=0.1.0
+# Install from PyPI: pip install q-store==3.4.3
+# Or from local wheel: pip install q_store-3.4.3-cp313-cp313-manylinux_2_17_x86_64.whl
+q-store==3.4.3
 
 # Essential utilities
-numpy>=1.20.0,<2.0.0
+# numpy 2.x required for Python 3.13+, numpy 1.x for older Python versions
+numpy>=1.20.0
 python-dotenv>=0.19.0
 
 # Data processing

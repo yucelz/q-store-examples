@@ -1,6 +1,6 @@
 # Makefile for Q-Store Examples
 
-.PHONY: help install install-minimal install-dev install-full verify clean test format lint
+.PHONY: help install install-wheel install-minimal install-dev install-full verify clean test format lint
 
 # Default target
 help:
@@ -9,6 +9,7 @@ help:
 	@echo ""
 	@echo "Setup:"
 	@echo "  make install          Install examples with core dependencies"
+	@echo "  make install-wheel    Install from local wheel file"
 	@echo "  make install-minimal  Install minimal dependencies (no ML)"
 	@echo "  make install-full     Install all dependencies including ML"
 	@echo "  make install-dev      Install with development dependencies"
@@ -36,28 +37,34 @@ help:
 # Installation targets
 install:
 	@echo "Installing Q-Store examples..."
-	cd .. && pip install -e .
 	pip install -r requirements.txt
 	@echo "✅ Installation complete!"
 
+install-wheel:
+	@echo "Installing Q-Store examples from local wheel..."
+	@if [ -f q_store-3.4.3-cp313-cp313-manylinux_2_17_x86_64.whl ]; then \
+		pip install q_store-3.4.3-cp313-cp313-manylinux_2_17_x86_64.whl; \
+	else \
+		echo "❌ Wheel file not found. Please ensure q_store-3.4.3-cp313-cp313-manylinux_2_17_x86_64.whl is in the current directory."; \
+		exit 1; \
+	fi
+	pip install -r requirements.txt --no-deps
+	@echo "✅ Installation from wheel complete!"
+
 install-minimal:
 	@echo "Installing minimal dependencies..."
-	cd .. && pip install -e .
 	pip install -r requirements-minimal.txt
 	@echo "✅ Minimal installation complete!"
 
 install-full:
 	@echo "Installing all dependencies..."
-	cd .. && pip install -e .
 	pip install -r requirements.txt
-	pip install -e ".[all]"
 	@echo "✅ Full installation complete!"
 
 install-dev:
 	@echo "Installing development dependencies..."
-	cd .. && pip install -e .
 	pip install -r requirements.txt
-	pip install -e ".[dev]"
+	pip install pytest pytest-cov black isort flake8 mypy
 	@echo "✅ Development installation complete!"
 
 # Verification

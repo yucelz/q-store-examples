@@ -830,7 +830,7 @@ async def main():
     # Initialize logger
     EXAMPLE_LOGGER = ExampleLogger(
         log_dir="LOG",
-        base_dir="/home/yucelz/yz_code/q-store/examples",
+        base_dir=os.getcwd(),
         example_name="examples_v3_4"
     )
 

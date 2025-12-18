@@ -18,9 +18,6 @@ def check_imports():
         ('cirq_ionq', 'Cirq-IonQ'),
         ('pinecone', 'Pinecone'),
         ('dotenv', 'python-dotenv'),
-    ]
-    
-    optional = [
         ('q_store', 'Q-Store'),
     ]
     
@@ -34,13 +31,6 @@ def check_imports():
             print(f"  ✗ {name} - NOT INSTALLED")
             print(f"    Error: {e}")
             all_good = False
-    
-    for module, name in optional:
-        try:
-            __import__(module)
-            print(f"  ✓ {name}")
-        except ImportError as e:
-            print(f"  ⚠ {name} - Install with: pip install -e .")
     
     return all_good
 
@@ -137,15 +127,16 @@ def main():
         print("✓ All checks passed!")
         print("="*60)
         print("\nNext steps:")
-        print("  1. Run the quickstart: python examples/quantum_db_quickstart.py")
-        print("  2. Read QUICKSTART.md for your first program")
-        print("  3. Explore examples/ directory")
+        print("  1. Run the quickstart: python src/q_store_examples/quantum_db_quickstart.py")
+        print("  2. Try basic example: python src/q_store_examples/basic_example.py")
+        print("  3. Explore other examples in src/q_store_examples/")
+        print("  4. Read README.md for detailed documentation")
         return 0
     else:
         print("✗ Some checks failed")
         print("="*60)
         print("\nPlease fix the issues above and try again.")
-        print("See QUICKSTART.md for detailed installation instructions.")
+        print("See README.md for detailed installation instructions.")
         return 1
 
 if __name__ == '__main__':

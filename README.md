@@ -1,6 +1,8 @@
 # Q-Store Examples
 
-Standalone example projects demonstrating Q-Store quantum database capabilities for ML training, financial applications, and more.
+Standalone example projects demonstrating Q-Store 3.4.3 quantum database capabilities for ML training, financial applications, and more.
+
+**Note**: This is a standalone examples repository. Q-Store 3.4.3 is installed via pip or from a local wheel file.
 
 ## 🚀 Quick Start
 
@@ -15,57 +17,78 @@ Standalone example projects demonstrating Q-Store quantum database capabilities 
 #### Option 1: Using pip (Recommended)
 
 ```bash
-# 1. Clone the repository (if not already done)
-git clone https://github.com/yucelz/q-store.git
-cd q-store
+# 1. Clone this repository
+git clone https://github.com/yucelz/q-store-examples.git
+cd q-store-examples
 
-# 2. Install Q-Store core package
-pip install -e .
-
-# 3. Navigate to examples directory
-cd examples
-
-# 4. Install example dependencies
+# 2. Install Q-Store 3.4.3 and dependencies
 pip install -r requirements.txt
 
-# 5. Set up environment variables
+# 3. Set up environment variables
 cp .env.example .env
 # Edit .env and add your API keys
 
-# 6. Verify installation
-python verify_installation.py
+# 4. Verify installation
+python scripts/verify_installation.py
 ```
 
 #### Option 2: Using conda
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/yucelz/q-store.git
-cd q-store/examples
+# 1. Clone this repository
+git clone https://github.com/yucelz/q-store-examples.git
+cd q-store-examples
 
-# 2. Create conda environment
-conda env create -f environment.yml
-
-# 3. Activate environment
+# 2. Create conda environment (if environment.yml exists)
+conda create -n q-store-examples python=3.11
 conda activate q-store-examples
 
-# 4. Install Q-Store from parent directory
-cd ..
-pip install -e .
-cd examples
+# 3. Install Q-Store 3.4.3 and dependencies
+pip install -r requirements.txt
 
-# 5. Set up environment variables
+# 4. Set up environment variables
 cp .env.example .env
 # Edit .env and add your API keys
 
-# 6. Verify installation
-python verify_installation.py
+# 5. Verify installation
+python scripts/verify_installation.py
 ```
 
-#### Option 3: Minimal Installation (No ML Dependencies)
+#### Option 3: Using Local Wheel File
+
+If you have the Q-Store wheel file:
 
 ```bash
-# Install only core dependencies
+# 1. Clone this repository
+git clone https://github.com/yucelz/q-store-examples.git
+cd q-store-examples
+
+# 2. Copy the wheel file to this directory
+cp /path/to/q_store-3.4.3-cp313-cp313-manylinux_2_17_x86_64.whl .
+
+# 3. Install using make
+make install-wheel
+
+# Or install manually:
+# pip install q_store-3.4.3-cp313-cp313-manylinux_2_17_x86_64.whl
+# pip install -r requirements.txt --no-deps
+
+# 4. Set up environment variables
+cp .env.example .env
+# Edit .env and add your API keys
+
+# 5. Verify installation
+python scripts/verify_installation.py
+```
+
+#### Option 4: Minimal Installation (No ML Dependencies)
+
+```bash
+# Clone and navigate to repository
+git clone https://github.com/yucelz/q-store-examples.git
+cd q-store-examples
+
+# Install only core dependencies (includes q-store==3.4.3)
 pip install -r requirements-minimal.txt
 
 # This allows running:
@@ -481,7 +504,7 @@ python test_pinecone_ionq_connection.py
 
 ```bash
 # Install dev dependencies
-pip install -e ".[dev]"
+pip install pytest pytest-cov black isort flake8 mypy
 
 # Run tests
 pytest
@@ -519,14 +542,17 @@ config = TrainingConfig(
 
 ### Development Mode
 
-Install in development mode for easy editing:
+For development with the latest Q-Store:
 
 ```bash
-# Install Q-Store in editable mode
-cd ..
+# If you have Q-Store source code, install in editable mode
+cd /path/to/q-store
 pip install -e .
 
-# Now changes to q_store source are immediately available
+# Or use the latest from PyPI
+pip install --upgrade q-store
+
+# Now run examples with the updated version
 ```
 
 ## 🐛 Troubleshooting
@@ -535,7 +561,7 @@ pip install -e .
 
 | Issue | Solution |
 |-------|----------|
-| `ModuleNotFoundError: q_store` | Install Q-Store: `cd .. && pip install -e .` |
+| `ModuleNotFoundError: q_store` | Install Q-Store: `pip install q-store==3.4.3` |
 | `PINECONE_API_KEY not found` | Create `.env` file with your API key |
 | `ImportError: transformers` | Install ML dependencies: `pip install -r requirements.txt` |
 | `CUDA out of memory` | Reduce batch size or use CPU |
@@ -671,7 +697,8 @@ python src/q_store_examples/examples_v3_4.py --no-mock \
 **docs/sphinx**
 
 ```bash
-pip install -e .[docs]
+# Install documentation dependencies
+pip install sphinx sphinx-rtd-theme
 cd docs/sphinx
 sphinx-build -b html . _build/html
 ```
